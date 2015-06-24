@@ -64,19 +64,6 @@ class Tg extends Adapter
           callback @tempdir + filename
         stream.pipe(resizer)
 
-      # http.get options, (res) =>
-      #   if filename.match /\.gif$/g
-      #     file = fs.createWriteStream(@tempdir + filename)
-      #     res.on("data", (data) -> file.write data).on "end", =>
-      #       file.end()
-      #       @robot.logger.info filename + " downloaded to " + @tempdir
-      #       callback @tempdir + filename
-      #   else
-      #     resizer = sharp().resize(400).quality(60).toFile @tempdir + filename, (err) =>
-      #       @robot.logger.info filename + " downloaded and processed to " + @tempdir
-      #       callback @tempdir + filename
-      #     res.pipe(resizer)
-
   send_photo: (envelope, filepath) ->
     client = net.connect @port, @host, ->
       message = "send_photo " + envelope.room + " " + filepath + "\n"
