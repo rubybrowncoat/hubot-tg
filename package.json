@@ -15,10 +15,25 @@
     "tg",
     "telegram"
   ],
-  "author": "Alejandro Martínez",
+  "author": {
+    "name": "Alejandro Martínez"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zenitram/hubot-tg/issues"
   },
-  "homepage": "https://github.com/zenitram/hubot-tg"
+  "homepage": "https://github.com/zenitram/hubot-tg",
+  "readme": "# hubot-tg\nThis is a [Hubot](http://hubot.github.com/) adapter for [Telegram](http://telegram.org). \n\nAs there are not any fully-working Telegram client implementations in Node right now,\nit uses [tg](https://github.com/vysheng/tg) to send and receive messages.\n\nIt is composed of:\n- a Hubot adapter (this npm module) which exposes some endpoints on Hubot's own HTTP server\nto receive messages, and connects to tg telnet interface to send them.\n- a simple Lua script to be loaded inside tg which will forward incoming messages to Hubot.\n\n## Supported features and TODO\n- [x] Sending/receiving chat messages\n- [x] Sending/receiving group messages\n- [x] Sending multiline messages\n- [ ] Sending/receiving secret chat messages\n- [x] Sending images and media (only images are currently supported)\n\n## Setup\n\n### Install and configure tg\n\nInstall [tg](https://github.com/vysheng/tg) by cloning the code and\ncompiling it (use the latest commit from master). Make sure you have\nLua installed, so tg is compiled with Lua support.\n\nNext, you will need an unused phone number to create a Telegram\naccount. You can get one by signing up with\n[Twilio](http://www.twilio.com/) and creating a US telephone number.\n\nNext, create an account with telegram-cli. When it sends an SMS,\nlook in the Twilio account logs to see thte \n\n```\n# Suppose your number is (333) 444-5555\n$ cd /path/to/tg\n$ ./bin/telegram-cli -k tg-server.pub\nphone number: 13334445555\nregister [Y/n]: y\nFirst name: Hubot\nLast name: Smith\ncode ('call' for phone call): <type the code from the sms>\nUser Hubot Smith online (was online [2015/01/12 23:33:20])\n```\n\nThis will create `~/.telegram-cli`. Next, confirm it works by sending\nyourself a message:\n\n```\n# telegram-cli provides tab completion to help\n$ ./bin/telegram-cli -k tg-server.pub\n> add_contact +447777888888 your name\nyour name\nUser your name offline (was online [2015/01/12 08:26:13])\n> msg your_name hello world\n```\n\n### Install luasocket\n\n[luasocket](http://w3.impa.br/~diego/software/luasocket/) is often\navailable as 'luasocket' or 'lua-socket' from your operating system\npackage manager:\n\n```\n$ sudo pacman -S lua-socket\n```\n\nAlternatively, install a Lua package manager, such as luarocks, and\nuse that:\n\n```\n$ sudo pacman -S luarocks\n$ luarocks install luasocket\n```\n\nIf this works, you should be able to require it in Lua:\n\n```\n$ lua\n> require \"socket\"\n>\n```\n\n### Setup your own hubot\n\nSetup a Hubot:\n\n```\n$ npm install -g hubot coffee-script yo generator-hubot\n$ mkdir -p /path/to/hubot\n$ cd /path/to/hubot\n$ yo hubot\n```\n\nYou will want to commit your Hubot to git.\n\nInstall this adapter:\n\n```\n$ npm install zenitram/hubot-tg --save\n```\n\n### Run Hubot\n\nIn one terminal, start telegram-cli on a specific port:\n\n```\n$ cd /path/to/hubot\n$ cd node_modules/hubot-tg\n$ /path/to/tg/bin/telegram-cli -s hubot.lua -P 1123\n```\n\nIn another terminal, start Hubot. If you aren't using port 1123,\nyou'll need to specify it with `HUBOT_TG_PORT`.\n\n```\n$ cd /path/to/hubot\n$ bin/hubot -a tg\n```\n\n## Config parameters\n\n### Hubot\nYou can set ```HUBOT_TG_HOST``` and ```HUBOT_TG_PORT``` env variables to set how Hubot should connect to tg.\n\n### tg\nYou can set the env variable ```TG_HUBOT_URL``` to where to find Hubot.\n\n## Acknowledgements\n- @yagop for [telegram-bot](https://github.com/yagop/telegram-bot), which inspired this\n\n",
+  "readmeFilename": "README.md",
+  "_id": "hubot-tg@0.0.1",
+  "dist": {
+    "shasum": "00707f71059d4f5009c4d6ab6d906b10229a1549"
+  },
+  "_resolved": "git://github.com/rnhmjoj/hubot-tg#11a191b275d85a21fd23a949485fa15751d853b1",
+  "_from": "git://github.com/rnhmjoj/hubot-tg",
+  "_fromGithub": true,
+  "dependencies": {
+    "sharp": "~0.10.1",
+    "request": "~2.58.0"
+  }
 }
